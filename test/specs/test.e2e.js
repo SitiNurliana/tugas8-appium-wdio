@@ -46,7 +46,7 @@ describe('coba test login android', function () {
         await expect(lockMessage).toHaveText('Sorry, this user has been locked out.')
     })
     //4
-    it.only('login dengan mengosongkan username dan password',  async function () {
+    it('login dengan mengosongkan username dan password',  async function () {
         const loginButton = await $('~test-LOGIN')
         const usernameRequired = await $('//*[@content-desc="test-Error message"]/android.widget.TextView')
 
@@ -66,4 +66,20 @@ describe('coba test login android', function () {
 
         await expect(passRequired).toHaveText('Password is required')
     })
+
+    //6
+    it.only('login dengan username dan password benar',  async function () {
+        const usernameInput = await $('~test-Username')
+        const passwordInput = await $('~test-Password')
+        const loginButton = await $('~test-LOGIN')
+        const tulisanProducts = await $('//android.widget.TextView[@text="PRODUCTS"]')
+
+
+        await usernameInput.setValue('standard_user')
+        await passwordInput.setValue('secret_sauce')
+        await loginButton.click()
+
+        await expect(tulisanProducts).toHaveText('PRODUCTS')
+    })
+
 })
